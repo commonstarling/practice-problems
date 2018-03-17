@@ -6,6 +6,8 @@ input - two strings
 constraints/complexity - O2(n)
 edge cases -
   if any input is not a string => throw an error
+  different cases => 'L' === 'l'
+  white space => included in our calcuation
 examples -
   'abc' and 'cab' => true
   'car' and 'taxi' => false
@@ -14,30 +16,37 @@ examples -
   true and 'car' => Error: non-string input
 */
 
+// Create a letter sorting function
+const letterSorter = (a, b) => {
+  return a.charCodeAt(0) - b.charCodeAt(0);
+};
+
 const checkPermuation = (str1, str2) => {
-  // Create variables that hold the length of each argument
-  const str1Length = str1.length
-  const str2Length = str2.length
   // If any input is not a string
   if (typeof str1 !== 'string' || typeof str2 !== 'string') {
     // Throw an error
     throw Error('Invalid input: not a string');
   }
+  // Create variables that hold the length of each argument
+  const str1Length = str1.length;
+  const str2Length = str2.length;
   // If str1's length is not equal to str2's length
   if (str1Length !== str2Length) {
     // Return false
     return false;
   }
-  // Loop through the letters in str1
+  // Turn the strings into sorted arrays
+  str1 = str1.toLowerCase().split('').sort(letterSorter);
+  str2 = str2.toLowerCase().split('').sort(letterSorter);
+
+  // Loop through the letters in the first array
   for (let i = 0; i < str1Length; i++) {
-    // Create a variable representing the current letter
-    const currentLetter = str1[i];
-    // If str2 doesn't have the current letter
-    if (str2.indexOf(currentLetter) === -1) {
-      //Return false
+    // If the current letter does not match the letter in the second array
+    if (str1[i] !== str2[i]) {
+      // Return false
       return false;
     }
   }
-  //Return true if we've exited the loop
+  // Return true if we've completed the loop
   return true;
 };
