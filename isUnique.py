@@ -15,11 +15,11 @@ Examples
 
 def is_unique(text):
   # If the argument is not a string
-  if not type(text) == str:
+  if type(text) != str:
     # Throw an error
     raise ValueError('Argument is not a string')
   # If the argument doesn't have a length
-  if not text:
+  if not text or text.isspace():
     # Return false
     return False
   # If the argument has a length of 1
