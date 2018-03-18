@@ -12,6 +12,9 @@ edge cases
 */
 
 const urlify = str => {
+  if (typeof str !== 'string') {
+    throw Error('Input is not a string');
+  }
   //Return RegEx expression that replaces spaces in the string (which has been trimmed)
   return str.trim().replace(/\s/g, '%20');
 };
